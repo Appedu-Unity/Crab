@@ -8,11 +8,10 @@ using UnityEngine;
 public class TagsTrigger : MonoBehaviour
 {
     public Transform ParentThing;
-    public Vector3 pos = new Vector2();
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
     //如果移到作答位置，就會依附到作答位置的階層下
     private void OnTriggerEnter(Collider other)
@@ -32,9 +31,9 @@ public class TagsTrigger : MonoBehaviour
     //如果移到其他地方會回到起始設定的位置
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.gameObject.tag == "Untagged")
         {
-            Debug.Log(other.gameObject.tag);
             if (other.gameObject.name != "DragRange")
             {
                 this.transform.parent = ParentThing;
@@ -47,9 +46,8 @@ public class TagsTrigger : MonoBehaviour
     {
         ParentThing = this.gameObject.transform.parent;
         GetComponent<RectTransform>().transform.localPosition = Vector3.zero;
-        print(transform.position);
     }
-    #endregion  
+    #endregion
     public void BackParentPlace()
     {
         this.transform.parent.gameObject.tag = "BlankAns";
